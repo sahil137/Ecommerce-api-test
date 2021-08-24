@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 import mongoose from 'mongoose';
+
 // to get all products from db
 export const getProducts = async (req, res) => {
   try {
@@ -37,4 +38,20 @@ export const deleteProduct = async (req, res) => {
 
   await Product.findByIdAndRemove(id);
   res.json({ message: 'Product Deleted Successfully' });
+};
+
+export const updateProductQuantity = async (req, res) => {
+  const { number } = req.query;
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: 'No product with that id' });
+  }
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    id,
+    { $inc: { quantity: number } },
+    { new: true }
+  );
+  res.json(updatedProduct);
 };
