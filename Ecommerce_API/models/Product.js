@@ -12,7 +12,6 @@ const productSchema = mongoose.Schema({
   id: {
     type: Number,
     required: true,
-    unique: true,
   },
 });
 
