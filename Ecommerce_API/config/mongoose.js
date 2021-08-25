@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-mongoose.connect('mongodb://localhost/ecommerce_api_test', {
+dotenv.config();
+
+mongoose.connect(process.env.CONNECTION_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
 });
 const db = mongoose.connection;
 
@@ -12,7 +17,7 @@ db.once('open', () => {
   console.log('Connected to Database :: MongoDB');
 });
 
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
 
 export default db;
