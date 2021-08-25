@@ -10,9 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/', indexRoute);
-app.get('/', (req, res) => {
-  res.send('App is running');
-});
+// app.get('/', (req, res) => {
+//   res.send('App is running');
+// });
 
 const PORT = process.env.PORT || 8000;
 
